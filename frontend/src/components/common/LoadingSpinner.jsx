@@ -17,7 +17,7 @@ export default function LoadingSpinner({ size = 'md', label = 'Loading…' }) {
           className={`absolute inset-0 ${sizeClasses[size]} border-transparent border-b-amber-500 rounded-full animate-spin [animation-duration:1.5s]`}
         />
       </div>
-      {label && <p className="text-xs text-[#706253] font-mono tracking-wide">{label}</p>}
+      {label && <p className="text-xs text-[#706253] font-medium tracking-normal">{label}</p>}
     </div>
   )
 }

@@ -56,7 +56,7 @@ export default function Navbar() {
                 : 'bg-rose-500 animate-pulse'
             }`}
           />
-          <span className="text-[#5a4e41] font-mono text-[11px] font-medium">
+          <span className="text-[#5a4e41] text-xs font-medium">
             {healthy === null
               ? 'Checking API...'
               : healthy

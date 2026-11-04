@@ -25,7 +25,7 @@ function StatCard({ icon: Icon, label, value, sub, iconBg, iconColor, valueColor
       <div className="min-w-0">
         <p className="text-[11px] uppercase font-semibold tracking-wider text-[#7e6f5f] mb-0.5">{label}</p>
         <p className={`text-2xl font-bold tracking-tight ${valueColor || 'text-[#28211b]'}`}>{value}</p>
-        {sub && <p className="text-[11px] text-[#938371] mt-0.5 font-mono">{sub}</p>}
+        {sub && <p className="text-xs text-[#8c7b69] mt-0.5 font-normal">{sub}</p>}
       </div>
     </div>
   )
@@ -134,7 +134,13 @@ export default function Dashboard() {
             <StatCard
               icon={TrendingUp}
               label="Optimal Strategy"
-              value={analytics?.best_strategy ? analytics.best_strategy.toUpperCase() : 'ROLE-BASED'}
+              value={
+                analytics?.best_strategy
+                  ? analytics.best_strategy
+                      .replace('-', ' ')
+                      .replace(/\b\w/g, (c) => c.toUpperCase())
+                  : 'Role-Based'
+              }
               sub="Highest scored technique"
               iconBg="bg-olive-50"
               iconColor="text-olive-600"
@@ -242,11 +248,11 @@ export default function Dashboard() {
                         {exp.original_prompt || exp.raw_prompt || 'Untitled Experiment'}
                       </p>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700 border border-terracotta-200 font-semibold">
+                        <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700 border border-terracotta-200 font-semibold">
                           {exp.strategy || 'zero-shot'}
                         </span>
                         {exp.created_at && (
-                          <span className="text-[11px] text-[#8c7b69] font-mono">
+                          <span className="text-xs text-[#8c7b69]">
                             {new Date(exp.created_at).toLocaleDateString(undefined, {
                               month: 'short',
                               day: 'numeric',
