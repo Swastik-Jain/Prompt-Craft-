@@ -94,7 +94,7 @@ export default function Dashboard() {
           </div>
           <button
             onClick={() => navigate('/studio')}
-            className="self-start md:self-auto flex items-center gap-2 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-all duration-150 shadow-glow-terracotta shrink-0 border border-terracotta-400"
+            className="btn-primary self-start md:self-auto flex items-center gap-2 text-xs font-semibold px-5 py-3 rounded-xl transition-all duration-150 shrink-0"
           >
             <span>Launch Prompt Studio</span>
             <ArrowRight size={15} />
@@ -225,7 +225,7 @@ export default function Dashboard() {
                 </p>
                 <button
                   onClick={() => navigate('/studio')}
-                  className="bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-colors shadow-glow-terracotta border border-terracotta-400"
+                  className="btn-primary text-xs font-semibold px-4 py-2 rounded-xl transition-colors"
                 >
                   Create First Experiment
                 </button>

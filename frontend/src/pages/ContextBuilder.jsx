@@ -85,7 +85,7 @@ export default function ContextBuilder() {
             setError(null)
             navigate('/studio')
           }}
-          className="flex items-center justify-center gap-2 bg-[#f3ede3] hover:bg-[#eae2d5] border border-[#ded5c7] text-[#2f2720] font-semibold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-colors duration-150"
+          className="btn-secondary flex items-center justify-center gap-2 font-semibold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-colors duration-150"
         >
           <ArrowLeft size={15} />
           <span>Back to Studio</span>
@@ -93,7 +93,7 @@ export default function ContextBuilder() {
         <button
           onClick={onRunComparison}
           disabled={isLoading || (!optimizedPrompt && !rawPrompt)}
-          className="flex-1 flex items-center justify-center gap-2.5 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 shadow-glow-terracotta border border-terracotta-400 active:scale-[0.99]"
+          className="btn-primary flex-1 flex items-center justify-center gap-2.5 font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 active:scale-[0.99]"
         >
           {isLoading ? (
             <>

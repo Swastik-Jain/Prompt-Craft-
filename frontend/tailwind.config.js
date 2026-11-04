@@ -4,13 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Earthy light theme tokens
         linen: {
           50: '#fcfbf9',
-          100: '#f8f6f1', // Canvas background
-          200: '#f2eee6', // Subtle sections
-          300: '#e7e1d5', // Borders
-          400: '#d5cca',
+          100: '#f8f6f1',
+          200: '#f2eee6',
+          300: '#e7e1d5',
+          400: '#d5ccba',
           500: '#b8ab9a',
         },
         terracotta: {
@@ -19,7 +18,7 @@ export default {
           200: '#f9d5c8',
           300: '#f4b29c',
           400: '#eb8667',
-          500: '#c85a38', // Primary brand action
+          500: '#c85a38',
           600: '#b44a29',
           700: '#963c20',
           800: '#7a331d',

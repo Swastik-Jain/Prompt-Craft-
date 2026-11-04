@@ -213,7 +213,7 @@ export default function History() {
         </div>
         <button
           onClick={() => navigate('/studio')}
-          className="self-start sm:self-auto bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-glow-terracotta border border-terracotta-400"
+          className="btn-primary self-start sm:self-auto text-xs font-semibold px-4 py-2.5 rounded-xl transition-all"
         >
           + New Experiment
         </button>
@@ -234,7 +234,7 @@ export default function History() {
           </p>
           <button
             onClick={() => navigate('/studio')}
-            className="bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-colors shadow-glow-terracotta border border-terracotta-400"
+            className="btn-primary text-xs font-semibold px-5 py-3 rounded-xl transition-colors"
           >
             Launch Prompt Studio
           </button>

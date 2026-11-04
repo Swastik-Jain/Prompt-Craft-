@@ -68,7 +68,7 @@ export default function Navbar() {
         {/* New Experiment button */}
         <button
           onClick={() => navigate('/studio')}
-          className="flex items-center gap-2 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-150 shadow-glow-terracotta active:scale-95 border border-terracotta-400"
+          className="btn-primary flex items-center gap-2 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-150 active:scale-95"
         >
           <Plus size={15} />
           <span>New Experiment</span>

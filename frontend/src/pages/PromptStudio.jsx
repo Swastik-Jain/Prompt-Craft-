@@ -75,7 +75,7 @@ export default function PromptStudio() {
         <button
           onClick={onOptimize}
           disabled={isLoading || !rawPrompt.trim()}
-          className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 shadow-glow-terracotta border border-terracotta-400 active:scale-[0.99]"
+          className="btn-primary w-full flex items-center justify-center gap-2.5 font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 active:scale-[0.99]"
         >
           {isLoading ? (
             <>
@@ -103,7 +103,7 @@ export default function PromptStudio() {
         <div className="flex flex-col sm:flex-row gap-3.5 pt-1">
           <button
             onClick={() => navigate('/context')}
-            className="flex-1 flex items-center justify-center gap-2.5 bg-[#f3ede3] hover:bg-[#eae2d5] border border-[#ded5c7] text-[#2f2720] font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-colors duration-150"
+            className="btn-secondary flex-1 flex items-center justify-center gap-2.5 font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-colors duration-150"
           >
             <span>Proceed to Context Architecture</span>
             <ArrowRight size={15} />
@@ -111,7 +111,7 @@ export default function PromptStudio() {
           <button
             onClick={onRunComparison}
             disabled={isLoading}
-            className="flex-1 flex items-center justify-center gap-2.5 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 disabled:opacity-40 text-white font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 shadow-glow-terracotta border border-terracotta-400 active:scale-[0.99]"
+            className="btn-primary flex-1 flex items-center justify-center gap-2.5 font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-150 active:scale-[0.99]"
           >
             <GitCompare size={15} />
             <span>Direct Comparison Run</span>

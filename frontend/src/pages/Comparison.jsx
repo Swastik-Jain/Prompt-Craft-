@@ -64,7 +64,7 @@ export default function Comparison() {
         </p>
         <button
           onClick={() => navigate('/studio')}
-          className="bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-all shadow-glow-terracotta border border-terracotta-400"
+          className="btn-primary text-xs font-semibold px-5 py-3 rounded-xl transition-all"
         >
           Initialize in Prompt Studio
         </button>
@@ -150,7 +150,7 @@ export default function Comparison() {
           <button
             onClick={onEvaluate}
             disabled={isLoading}
-            className="flex items-center gap-2 bg-gradient-to-r from-amber-600 to-terracotta-500 hover:from-amber-700 hover:to-terracotta-600 disabled:opacity-40 text-white font-semibold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-glow-terracotta border border-amber-500 active:scale-95"
+            className="btn-primary flex items-center gap-2 font-semibold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all active:scale-95"
           >
             {isLoading ? (
               <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -163,14 +163,14 @@ export default function Comparison() {
         <button
           onClick={onRunComparison}
           disabled={isLoading}
-          className="flex items-center gap-2 bg-[#f3ede3] hover:bg-[#eae2d5] border border-[#ded5c7] disabled:opacity-40 text-[#2f2720] font-semibold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-colors duration-150"
+          className="btn-secondary flex items-center gap-2 font-semibold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-colors duration-150"
         >
           <FlaskConical size={15} />
           <span>Re-execute Inference</span>
         </button>
         <button
           onClick={() => navigate('/history')}
-          className="flex items-center gap-2 bg-[#f3ede3] hover:bg-[#eae2d5] border border-[#ded5c7] text-[#6d5e4f] hover:text-[#28211b] font-semibold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-colors duration-150 ml-auto"
+          className="btn-secondary flex items-center gap-2 font-semibold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-colors duration-150 ml-auto"
         >
           <History size={15} />
           <span>Archive</span>
