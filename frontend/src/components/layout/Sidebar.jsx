@@ -22,7 +22,7 @@ export default function Sidebar() {
     <aside className="fixed top-0 left-0 h-screen w-64 bg-[#fcfbfa] border-r border-[#e7e1d5] flex flex-col z-30 select-none shadow-[1px_0_10px_rgba(100,80,60,0.03)]">
       {/* Brand Header */}
       <div className="h-[73px] flex items-center gap-3 px-6 border-b border-[#eee8de] shrink-0">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-terracotta-500 to-terracotta-600 flex items-center justify-center shadow-warm-sm shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-[#c85a38] flex items-center justify-center shadow-warm-sm shrink-0">
           <span className="text-lg text-white">⚡</span>
         </div>
         <div>
@@ -35,8 +35,8 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Navigation - strict fixed heights & no internal scrolling to eliminate jumps */}
-      <nav className="flex-1 px-3.5 py-5 space-y-1 overflow-hidden shrink-0">
+      {/* Navigation */}
+      <nav className="flex-1 px-3.5 py-5 space-y-1.5 overflow-hidden shrink-0">
         <div className="px-3 pb-2 text-[11px] font-semibold tracking-wider uppercase text-[#9e8f7d] select-none h-6 flex items-center">
           Platform Menu
         </div>
@@ -48,13 +48,31 @@ export default function Sidebar() {
             className={({ isActive }) =>
               `h-11 flex items-center gap-3 px-3.5 rounded-xl text-sm font-medium border outline-none focus:outline-none transition-colors duration-150 ${
                 isActive
-                  ? 'bg-gradient-to-r from-terracotta-500 to-terracotta-600 text-white shadow-glow-terracotta border-terracotta-400/40'
+                  ? 'bg-[#c85a38] text-white shadow-warm-md border-[#c85a38] font-semibold'
                   : 'text-[#615447] hover:text-[#231d17] hover:bg-[#f3ece2] border-transparent'
               }`
             }
+            style={({ isActive }) =>
+              isActive
+                ? {
+                    backgroundColor: '#c85a38',
+                    color: '#ffffff',
+                    borderColor: '#c85a38',
+                  }
+                : {}
+            }
           >
-            <Icon size={18} className="shrink-0" />
-            <span className="truncate">{label}</span>
+            {({ isActive }) => (
+              <>
+                <Icon
+                  size={18}
+                  className={`shrink-0 ${isActive ? 'text-white' : 'text-[#7e6e5d]'}`}
+                />
+                <span className={`truncate ${isActive ? 'text-white font-semibold' : ''}`}>
+                  {label}
+                </span>
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
