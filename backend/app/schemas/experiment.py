@@ -64,12 +64,20 @@ class ExperimentRead(ExperimentCreate):
 # ── Compare schemas ────────────────────────────────────────────────────────────
 
 class CompareRequest(BaseModel):
-    experiment_id: int
+    experiment_id: Optional[int] = None
+    title: Optional[str] = None
+    original_prompt: Optional[str] = None
+    raw_prompt: Optional[str] = None
+    prompt: Optional[str] = None
+    optimized_prompt: Optional[str] = None
+    strategy: Optional[str] = "zero_shot"
+    context: Optional[Dict[str, Any]] = None
     model_name: Optional[str] = None
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
 
 
 class CompareResponse(BaseModel):
     experiment_id: int
+    strategy: str = "zero_shot"
     original_run: ResponseRunRead
     optimized_run: ResponseRunRead

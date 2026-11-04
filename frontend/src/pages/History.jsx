@@ -113,7 +113,7 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
         <div className="border-t border-[#eee8de] bg-[#faf7f2] px-5 py-4 space-y-3">
           {experiment.optimized_prompt && (
             <div>
-              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-terracotta-700 mb-1">
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-terracotta-700 mb-1">
                 Optimized Prompt Artifact
               </p>
               <p className="text-xs text-[#28211b] font-mono leading-relaxed whitespace-pre-wrap bg-[#ffffff] p-3 rounded-xl border border-[#e5dfd4]">
@@ -123,7 +123,7 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
           )}
           {experiment.context_json && Object.keys(experiment.context_json).some((k) => experiment.context_json[k]) && (
             <div>
-              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#867664] mb-1.5">
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-[#867664] mb-1.5">
                 Context Profile
               </p>
               <div className="space-y-1 text-xs text-[#4e4033]">
@@ -147,7 +147,7 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
           )}
           {scores && (
             <div>
-              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#867664] mb-2">
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-[#867664] mb-2">
                 Evaluative Breakdown
               </p>
               <div className="grid grid-cols-2 gap-2">

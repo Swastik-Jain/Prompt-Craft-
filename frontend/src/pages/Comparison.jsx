@@ -72,11 +72,26 @@ export default function Comparison() {
     )
   }
 
-  const originalResponse = exp?.original_response || {}
-  const optimizedResponse = exp?.optimized_response || {}
+  const originalRun =
+    exp?.original_run ||
+    exp?.original_response ||
+    exp?.response_runs?.find((r) => r.variant === 'original') ||
+    {}
+  const optimizedRun =
+    exp?.optimized_run ||
+    exp?.optimized_response ||
+    exp?.response_runs?.find((r) => r.variant === 'optimized') ||
+    {}
+
   const evaluation = exp?.evaluation || {}
-  const originalScores = evaluation.original_scores || null
-  const optimizedScores = evaluation.optimized_scores || null
+  const originalScores =
+    evaluation.original_scores ||
+    originalRun?.evaluations?.[0] ||
+    null
+  const optimizedScores =
+    evaluation.optimized_scores ||
+    optimizedRun?.evaluations?.[0] ||
+    null
 
   return (
     <div className="space-y-7">
@@ -93,7 +108,7 @@ export default function Comparison() {
           {exp?.strategy && (
             <p className="text-xs text-[#7e6f5f]">
               Assigned paradigm:{' '}
-              <span className="text-terracotta-700 font-mono uppercase font-semibold">
+              <span className="text-terracotta-700 font-semibold uppercase">
                 {exp.strategy}
               </span>
             </p>
@@ -113,18 +128,18 @@ export default function Comparison() {
         <ResponsePanel
           title="Baseline Raw Prompt Output"
           variant="original"
-          response_text={originalResponse.text || originalResponse.response_text}
-          latency_ms={originalResponse.latency_ms}
-          input_tokens={originalResponse.input_tokens}
-          output_tokens={originalResponse.output_tokens}
+          response_text={originalRun.response_text || originalRun.text}
+          latency_ms={originalRun.latency_ms}
+          input_tokens={originalRun.input_tokens}
+          output_tokens={originalRun.output_tokens}
         />
         <ResponsePanel
           title="Engineered & Contextualized Output"
           variant="optimized"
-          response_text={optimizedResponse.text || optimizedResponse.response_text}
-          latency_ms={optimizedResponse.latency_ms}
-          input_tokens={optimizedResponse.input_tokens}
-          output_tokens={optimizedResponse.output_tokens}
+          response_text={optimizedRun.response_text || optimizedRun.text}
+          latency_ms={optimizedRun.latency_ms}
+          input_tokens={optimizedRun.input_tokens}
+          output_tokens={optimizedRun.output_tokens}
         />
       </div>
 

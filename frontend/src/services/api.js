@@ -12,12 +12,27 @@ const handleRequest = async (requestFn) => {
     const response = await requestFn()
     return response.data
   } catch (err) {
-    const message =
-      err?.response?.data?.detail ||
-      err?.response?.data?.message ||
-      err?.message ||
-      'An unexpected error occurred'
-    return { error: message }
+    let message = 'An unexpected error occurred'
+    if (err?.response?.data?.detail) {
+      const detail = err.response.data.detail
+      if (typeof detail === 'string') {
+        message = detail
+      } else if (Array.isArray(detail)) {
+        message = detail
+          .map((d) => d.msg || `${d.loc?.join('.') || 'field'}: ${d.type || 'invalid'}`)
+          .join(', ')
+      } else if (typeof detail === 'object') {
+        message = detail.msg || detail.message || JSON.stringify(detail)
+      }
+    } else if (err?.response?.data?.message) {
+      message =
+        typeof err.response.data.message === 'string'
+          ? err.response.data.message
+          : JSON.stringify(err.response.data.message)
+    } else if (err?.message) {
+      message = err.message
+    }
+    return { error: String(message) }
   }
 }
 

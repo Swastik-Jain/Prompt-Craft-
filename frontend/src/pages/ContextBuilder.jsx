@@ -47,7 +47,7 @@ export default function ContextBuilder() {
       {optimizedPrompt ? (
         <div className="bg-[#fdf6f3] border border-terracotta-200 rounded-2xl p-4.5 shadow-warm-sm">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-terracotta-700 font-semibold flex items-center gap-1.5">
+            <span className="text-[10px] uppercase tracking-wider text-terracotta-700 font-semibold flex items-center gap-1.5">
               <Sparkles size={11} />
               Active Optimized Prompt
             </span>
@@ -64,7 +64,7 @@ export default function ContextBuilder() {
         </div>
       ) : rawPrompt ? (
         <div className="bg-[#f5efe5] border border-[#e3dacd] rounded-2xl p-4.5 shadow-warm-sm">
-          <p className="text-[10px] font-mono uppercase tracking-wider text-[#7e6e5d] font-semibold mb-1">
+          <p className="text-[10px] uppercase tracking-wider text-[#7e6e5d] font-semibold mb-1">
             Raw Baseline Prompt
           </p>
           <p className="text-xs text-[#2b241e] font-mono line-clamp-3 leading-relaxed">

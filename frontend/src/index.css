@@ -46,8 +46,12 @@ body {
 }
 
 .btn-primary:disabled {
-  opacity: 0.45 !important;
+  background-color: #d89680 !important;
+  color: #ffffff !important;
+  border-color: #cf8971 !important;
+  opacity: 0.7 !important;
   cursor: not-allowed !important;
+  box-shadow: none !important;
 }
 
 .btn-secondary {

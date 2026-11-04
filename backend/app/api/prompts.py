@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import logging
+from typing import Any, Dict
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
-from app.core.database import get_db
 from app.schemas.prompt import (
+    ContextConfig,
     PromptGenerateRequest,
     PromptGenerateResponse,
     PromptOptimizeRequest,
@@ -15,7 +15,6 @@ from app.schemas.prompt import (
 )
 from app.services.context_builder import ContextBuilder
 from app.services.gemini_service import GeminiService
-from app.services.prompt_optimizer import PromptOptimizer
 
 logger = logging.getLogger(__name__)
 
@@ -33,17 +32,31 @@ async def optimize_prompt(
 ):
     """
     Rewrite a user prompt using the requested strategy (zero_shot, role_based,
-    few_shot, context_aware).  Calls Gemini with a meta-prompt.
+    few_shot, context_aware). Calls Gemini with a meta-prompt.
     """
-    context_dict = body.context.model_dump() if body.context else {}
+    effective_prompt = (body.prompt or body.raw_prompt or "").strip()
+    if not effective_prompt:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Prompt text cannot be empty.",
+        )
+
+    strategy = (body.strategy or "zero_shot").replace("-", "_")
+
+    if isinstance(body.context, ContextConfig):
+        context_dict = body.context.model_dump()
+    elif isinstance(body.context, dict):
+        context_dict = body.context
+    else:
+        context_dict = {}
 
     # Build context block for token estimation
     _, token_estimate = ContextBuilder.build(context_dict) if context_dict else ("", 0)
 
     try:
         optimized = await gemini.optimize_prompt(
-            raw_prompt=body.prompt,
-            strategy=body.strategy,
+            raw_prompt=effective_prompt,
+            strategy=strategy,
             context=context_dict,
         )
     except ValueError as exc:
@@ -52,13 +65,13 @@ async def optimize_prompt(
         logger.exception("optimize_prompt failed: %s", exc)
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="Gemini API error. Please try again.",
+            detail=f"Gemini API error: {str(exc)}",
         )
 
     return PromptOptimizeResponse(
-        original_prompt=body.prompt,
+        original_prompt=effective_prompt,
         optimized_prompt=optimized,
-        strategy=body.strategy,
+        strategy=strategy,
         tokens_used=token_estimate or None,
     )
 
@@ -84,7 +97,7 @@ async def generate_prompt(
         logger.exception("generate_prompt failed: %s", exc)
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="Gemini API error. Please try again.",
+            detail=f"Gemini generation error: {str(exc)}",
         )
 
     return PromptGenerateResponse(

@@ -9,6 +9,7 @@ import {
 
 export function useExperiment() {
   const {
+    currentExperiment,
     setCurrentExperiment,
     setIsLoading,
     setError,
@@ -25,8 +26,9 @@ export function useExperiment() {
     setError(null)
     try {
       const result = await optimizePrompt({
+        prompt: prompt,
         raw_prompt: prompt,
-        strategy: selectedStrategy,
+        strategy: (selectedStrategy || 'zero_shot').replace('-', '_'),
         context: contextConfig,
       })
       if (result.error) {
@@ -45,9 +47,12 @@ export function useExperiment() {
     setError(null)
     try {
       const payload = experimentData || {
+        experiment_id: currentExperiment?.id,
+        prompt: rawPrompt,
         raw_prompt: rawPrompt,
-        optimized_prompt: optimizedPrompt,
-        strategy: selectedStrategy,
+        original_prompt: rawPrompt,
+        optimized_prompt: optimizedPrompt || rawPrompt,
+        strategy: (selectedStrategy || 'zero_shot').replace('-', '_'),
         context: contextConfig,
       }
       const result = await compareExperiment(payload)
@@ -71,7 +76,20 @@ export function useExperiment() {
         setError(result.error)
         return null
       }
-      setCurrentExperiment((prev) => ({ ...prev, ...result }))
+      setCurrentExperiment((prev) => {
+        if (!prev) return prev
+        const evals = Array.isArray(result) ? result : []
+        const origEval = evals[0] || null
+        const optEval = evals[1] || evals[0] || null
+        return {
+          ...prev,
+          evaluations: evals,
+          evaluation: {
+            original_scores: origEval,
+            optimized_scores: optEval,
+          },
+        }
+      })
       return result
     } finally {
       setIsLoading(false)
@@ -87,7 +105,7 @@ export function useExperiment() {
         setError(result.error)
         return []
       }
-      const list = Array.isArray(result) ? result : result.experiments || []
+      const list = Array.isArray(result) ? result : []
       setExperiments(list)
       return list
     } finally {
@@ -96,18 +114,13 @@ export function useExperiment() {
   }
 
   const loadAnalytics = async () => {
-    setIsLoading(true)
     setError(null)
-    try {
-      const result = await getAnalyticsSummary()
-      if (result.error) {
-        setError(result.error)
-        return null
-      }
-      return result
-    } finally {
-      setIsLoading(false)
+    const result = await getAnalyticsSummary()
+    if (result.error) {
+      setError(result.error)
+      return null
     }
+    return result
   }
 
   return {
@@ -118,5 +131,3 @@ export function useExperiment() {
     loadAnalytics,
   }
 }
-
-export default useExperiment

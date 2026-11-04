@@ -62,7 +62,29 @@ async def compare_experiment(
     Run both the original and optimized prompts for an experiment and persist
     the results as ResponseRun rows.
     """
-    experiment = await _get_experiment_or_404(body.experiment_id, db)
+    if body.experiment_id:
+        experiment = await _get_experiment_or_404(body.experiment_id, db)
+    else:
+        orig = (
+            body.original_prompt
+            or body.raw_prompt
+            or body.prompt
+            or "Explain machine learning"
+        ).strip()
+        opt = (body.optimized_prompt or orig).strip()
+        strat = (body.strategy or "zero_shot").replace("-", "_")
+        title = body.title or (orig[:50] + ("..." if len(orig) > 50 else ""))
+        experiment = Experiment(
+            title=title,
+            original_prompt=orig,
+            optimized_prompt=opt,
+            strategy=strat,
+            context_json=body.context or {},
+            model_name=body.model_name or settings.model_name,
+        )
+        db.add(experiment)
+        await db.flush()
+        await db.refresh(experiment)
 
     svc = ComparisonService(db=db, gemini=gemini)
     try:
@@ -77,13 +99,14 @@ async def compare_experiment(
         logger.exception("Comparison failed: %s", exc)
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="Gemini API error during comparison.",
+            detail=f"Gemini API error during comparison: {str(exc)}",
         )
 
     await db.flush()
 
     return CompareResponse(
         experiment_id=experiment.id,
+        strategy=experiment.strategy,
         original_run=ResponseRunRead.model_validate(runs["original_run"]),
         optimized_run=ResponseRunRead.model_validate(runs["optimized_run"]),
     )
