@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f8f6f1;
+  color: #2d251f;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #fcebe5;
+  color: #963c20;
+}
+
+/* Warm Earthy Light Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f4efe8;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9cdbc;
+  border-radius: 9999px;
+  border: 2px solid #f4efe8;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bca993;
+}
