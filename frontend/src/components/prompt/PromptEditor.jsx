@@ -15,7 +15,7 @@ export default function PromptEditor({ value, onChange, placeholder }) {
           Raw Instruction / Prompt
         </label>
         <span
-          className={`text-xs font-medium ${
+          className={`text-xs font-mono ${
             charCount > 2000 ? 'text-amber-600 font-semibold' : 'text-[#8c7b69]'
           }`}
         >

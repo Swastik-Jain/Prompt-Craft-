@@ -93,14 +93,14 @@ export default function Comparison() {
           {exp?.strategy && (
             <p className="text-xs text-[#7e6f5f]">
               Assigned paradigm:{' '}
-              <span className="text-terracotta-700 uppercase font-semibold">
+              <span className="text-terracotta-700 font-mono uppercase font-semibold">
                 {exp.strategy}
               </span>
             </p>
           )}
         </div>
         {exp?.id && (
-          <span className="text-xs text-[#6d5e4f] px-3 py-1.5 rounded-lg bg-[#f3ede3] border border-[#ded5c7] self-start sm:self-auto font-medium">
+          <span className="text-[11px] text-[#6d5e4f] font-mono px-3 py-1.5 rounded-lg bg-[#f3ede3] border border-[#ded5c7] self-start sm:self-auto font-medium">
             Experiment ID: #{exp.id}
           </span>
         )}

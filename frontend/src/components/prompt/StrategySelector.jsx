@@ -74,7 +74,7 @@ export default function StrategySelector({ selected, onSelect }) {
                     {label}
                   </p>
                   {isSelected && (
-                    <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-[#c85a38] text-white border border-[#b44a29] font-bold shadow-sm">
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#c85a38] text-white border border-[#b44a29] shadow-sm">
                       Active
                     </span>
                   )}

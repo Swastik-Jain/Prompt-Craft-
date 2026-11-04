@@ -29,7 +29,7 @@ export default function Sidebar() {
           <span className="text-lg font-bold tracking-tight text-[#28211b] leading-tight block">
             PromptCraft
           </span>
-          <span className="block text-[10px] uppercase tracking-wider text-[#938371] font-semibold leading-tight">
+          <span className="block text-[10px] uppercase font-semibold tracking-wider text-[#938371] leading-tight">
             AI Lab & Studio
           </span>
         </div>

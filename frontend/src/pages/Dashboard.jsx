@@ -16,6 +16,14 @@ import { useExperimentContext } from '../context/ExperimentContext'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorMessage from '../components/common/ErrorMessage'
 
+function formatStrategyName(str) {
+  if (!str) return 'Role-Based'
+  return str
+    .split(/[-_]/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join('-')
+}
+
 function StatCard({ icon: Icon, label, value, sub, iconBg, iconColor, valueColor }) {
   return (
     <div className="bg-[#ffffff] border border-[#e7e1d5] rounded-2xl p-5 flex items-start gap-4 shadow-warm-sm hover:border-[#d5cbbd] transition-all duration-200">
@@ -25,7 +33,7 @@ function StatCard({ icon: Icon, label, value, sub, iconBg, iconColor, valueColor
       <div className="min-w-0">
         <p className="text-[11px] uppercase font-semibold tracking-wider text-[#7e6f5f] mb-0.5">{label}</p>
         <p className={`text-2xl font-bold tracking-tight ${valueColor || 'text-[#28211b]'}`}>{value}</p>
-        {sub && <p className="text-xs text-[#8c7b69] mt-0.5 font-normal">{sub}</p>}
+        {sub && <p className="text-xs text-[#786a5a] mt-1 font-medium">{sub}</p>}
       </div>
     </div>
   )
@@ -134,13 +142,7 @@ export default function Dashboard() {
             <StatCard
               icon={TrendingUp}
               label="Optimal Strategy"
-              value={
-                analytics?.best_strategy
-                  ? analytics.best_strategy
-                      .replace('-', ' ')
-                      .replace(/\b\w/g, (c) => c.toUpperCase())
-                  : 'Role-Based'
-              }
+              value={formatStrategyName(analytics?.best_strategy)}
               sub="Highest scored technique"
               iconBg="bg-olive-50"
               iconColor="text-olive-600"
@@ -248,11 +250,11 @@ export default function Dashboard() {
                         {exp.original_prompt || exp.raw_prompt || 'Untitled Experiment'}
                       </p>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700 border border-terracotta-200 font-semibold">
+                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700 border border-terracotta-200 font-semibold">
                           {exp.strategy || 'zero-shot'}
                         </span>
                         {exp.created_at && (
-                          <span className="text-xs text-[#8c7b69]">
+                          <span className="text-[11px] text-[#8c7b69] font-mono">
                             {new Date(exp.created_at).toLocaleDateString(undefined, {
                               month: 'short',
                               day: 'numeric',

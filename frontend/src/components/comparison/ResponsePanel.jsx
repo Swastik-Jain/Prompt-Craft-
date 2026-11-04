@@ -33,7 +33,7 @@ export default function ResponsePanel({
             {title}
           </span>
           <span
-            className={`text-[10px] uppercase font-mono px-2.5 py-0.5 rounded-full font-semibold ${
+            className={`text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-semibold ${
               isOptimized
                 ? 'bg-terracotta-100 text-terracotta-700 border border-terracotta-200'
                 : 'bg-[#eae3d5] text-[#635546] border border-[#ded4c4]'
@@ -75,7 +75,7 @@ export default function ResponsePanel({
         </span>
         <div className="flex items-center gap-2">
           <span
-            className={`text-[10px] uppercase font-mono px-2.5 py-0.5 rounded-full font-semibold ${
+            className={`text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-semibold ${
               isOptimized
                 ? 'bg-terracotta-100 text-terracotta-700 border border-terracotta-200'
                 : 'bg-[#eae3d5] text-[#635546] border border-[#ded4c4]'

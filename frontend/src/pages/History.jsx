@@ -45,14 +45,14 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span
-                className={`text-[10px] uppercase px-2.5 py-0.5 rounded-full border font-semibold ${
+                className={`text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full border font-semibold ${
                   STRATEGY_THEMES[experiment.strategy] || 'bg-[#f4efe8] text-[#5c4f42] border-[#ded4c6]'
                 }`}
               >
                 {experiment.strategy || 'zero-shot'}
               </span>
               {experiment.created_at && (
-                <span className="text-xs text-[#8c7b69]">
+                <span className="text-[11px] text-[#8c7b69] font-mono">
                   {new Date(experiment.created_at).toLocaleString(undefined, {
                     month: 'short',
                     day: 'numeric',
@@ -113,17 +113,17 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
         <div className="border-t border-[#eee8de] bg-[#faf7f2] px-5 py-4 space-y-3">
           {experiment.optimized_prompt && (
             <div>
-              <p className="text-xs uppercase tracking-wider font-semibold text-terracotta-700 mb-1">
+              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-terracotta-700 mb-1">
                 Optimized Prompt Artifact
               </p>
-              <p className="text-xs text-[#28211b] leading-relaxed whitespace-pre-wrap bg-[#ffffff] p-3 rounded-xl border border-[#e5dfd4]">
+              <p className="text-xs text-[#28211b] font-mono leading-relaxed whitespace-pre-wrap bg-[#ffffff] p-3 rounded-xl border border-[#e5dfd4]">
                 {experiment.optimized_prompt}
               </p>
             </div>
           )}
           {experiment.context_json && Object.keys(experiment.context_json).some((k) => experiment.context_json[k]) && (
             <div>
-              <p className="text-xs uppercase tracking-wider font-semibold text-[#867664] mb-1.5">
+              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#867664] mb-1.5">
                 Context Profile
               </p>
               <div className="space-y-1 text-xs text-[#4e4033]">
@@ -147,7 +147,7 @@ function ExperimentCard({ experiment, onDelete, onReuse }) {
           )}
           {scores && (
             <div>
-              <p className="text-xs uppercase tracking-wider font-semibold text-[#867664] mb-2">
+              <p className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#867664] mb-2">
                 Evaluative Breakdown
               </p>
               <div className="grid grid-cols-2 gap-2">
