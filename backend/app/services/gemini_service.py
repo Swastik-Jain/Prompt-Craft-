@@ -20,8 +20,12 @@ class GeminiService:
 
     def __init__(self):
         self._api_key = settings.gemini_api_key
+        if self._api_key:
+            genai.configure(api_key=self._api_key)
 
     def _get_model(self, model_name: str) -> genai.GenerativeModel:
+        if self._api_key:
+            genai.configure(api_key=self._api_key)
         return genai.GenerativeModel(model_name=model_name)
 
     async def generate(
@@ -38,6 +42,11 @@ class GeminiService:
             response_text, latency_ms, input_tokens, output_tokens
         """
         effective_model = model_name or settings.model_name
+
+        if not self._api_key:
+            self._api_key = settings.gemini_api_key
+            if self._api_key:
+                genai.configure(api_key=self._api_key)
 
         if not self._api_key:
             raise ValueError(
